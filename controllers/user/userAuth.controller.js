@@ -23,6 +23,7 @@ const generateTokens = async (userId) => {
 //register user
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, phoneNum } = req.body;
+  const errors = {};
 
   //checking if any field is unfilled
   if (!name || !password || !email || !phoneNum) {
@@ -62,6 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //login user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  const errors = {};
 
   //checking if any field is unfilled
   if (!email || !password) {
@@ -71,7 +73,9 @@ const loginUser = asyncHandler(async (req, res) => {
   //checking if the user exists or not
   const user = await User.findOne({ email });
   if (!user) {
-    throw new ApiError(409, "User not exists ! Please register !");
+    // throw new ApiError(409, "User not exists ! Please register !");
+    errors.validationError = "User not exists";
+    return res.render("index", { errors: errors });
   }
 
   //checking if given password is valid
