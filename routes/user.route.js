@@ -8,6 +8,8 @@ const {
   logoutUser,
   refreshAccessToken,
   changeUserPassword,
+  loginPage,
+  registerPage,
 } = require("../controllers/user/userAuth.controller.js");
 const authHandler = require("../middlewares/common/authHandler.js");
 const { getFood } = require("../controllers/user/order.controller.js");
@@ -18,14 +20,13 @@ const {
   bookTable,
   cancelBooking,
 } = require("../controllers/user/booking.controller.js");
-const chatbox = require("../controllers/interface/chatbox.controller.js");
-const loginPage = require("../controllers/interface/loginpage.controller.js");
+const chatbox = require("../controllers/user/chatbox.controller.js");
 
-router.route("/").get(chatbox);
+router.route("/user").get(chatbox);
 
 //auth
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
+router.route("/").get(loginPage).post(loginUser);
+router.route("/register").get(registerPage).post(registerUser);
 router.route("/logout").get(authHandler, logoutUser);
 router.route("/change-password").patch(authHandler, changeUserPassword);
 router.route("/refresh-token").patch(refreshAccessToken);

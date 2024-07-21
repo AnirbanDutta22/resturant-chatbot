@@ -1,5 +1,5 @@
 const chatbox = async (req, res) => {
-  res.render("inbox", { title: "Chatbox" });
+  res.render("inbox", { errors: undefined });
 };
 
 module.exports = chatbox;

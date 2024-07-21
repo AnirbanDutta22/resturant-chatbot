@@ -20,6 +20,11 @@ const generateTokens = async (userId) => {
   }
 };
 
+//register page
+const registerPage = async (req, res) => {
+  res.render("register", { errors: undefined });
+};
+
 //register user
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, phoneNum } = req.body;
@@ -27,7 +32,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //checking if any field is unfilled
   if (!name || !password || !email || !phoneNum) {
-    throw new ValidationError("All fields required");
+    errors.validationError = "All fields required";
+    return res.render("register", { errors: errors });
   }
 
   //checking if the user already exists
@@ -35,7 +41,8 @@ const registerUser = asyncHandler(async (req, res) => {
     $or: [{ email: email }, { phoneNum: phoneNum.toString() }],
   });
   if (existingUser) {
-    throw new ApiError(409, "User already exists");
+    errors.validationError = "User already exists !";
+    return res.render("register", { errors: errors });
   }
 
   //creating new user
@@ -49,7 +56,8 @@ const registerUser = asyncHandler(async (req, res) => {
   //checking if user is created successfully
   const createdUser = await User.findById(user._id).select("-password");
   if (!createdUser) {
-    throw new ApiError(500, "Something went wrong!");
+    errors.validationError = "Something went wrong ! User not registered !";
+    return res.render("register", { errors: errors });
   }
   // return res
   //   .status(200)
@@ -60,6 +68,11 @@ const registerUser = asyncHandler(async (req, res) => {
   res.redirect("/");
 });
 
+//login page
+const loginPage = async (req, res) => {
+  res.render("index", { errors: undefined });
+};
+
 //login user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -67,21 +80,22 @@ const loginUser = asyncHandler(async (req, res) => {
 
   //checking if any field is unfilled
   if (!email || !password) {
-    throw new ValidationError("All fields are required !");
+    errors.validationError = "All fields required !";
+    return res.render("index", { errors: errors });
   }
 
   //checking if the user exists or not
   const user = await User.findOne({ email });
   if (!user) {
-    // throw new ApiError(409, "User not exists ! Please register !");
-    errors.validationError = "User not exists";
+    errors.validationError = "User not exists ! Please Register !";
     return res.render("index", { errors: errors });
   }
 
   //checking if given password is valid
   const isPasswordValid = await user.isValidPassword(password);
   if (!isPasswordValid) {
-    throw new ApiError(409, "Invalid user login credentials");
+    errors.validationError = "Invalid user login credentials !";
+    return res.render("index", { errors: errors });
   }
 
   //generate tokens
@@ -201,7 +215,9 @@ const changeUserPassword = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
+  registerPage,
   registerUser,
+  loginPage,
   loginUser,
   logoutUser,
   refreshAccessToken,

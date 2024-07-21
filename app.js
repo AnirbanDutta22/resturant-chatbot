@@ -7,7 +7,6 @@ const defaultErrorHandler = require("./middlewares/common/defaultErrorHandler");
 const userRouter = require("./routes/user.route");
 const adminRouter = require("./routes/admin.route");
 const testRouter = require("./routes/test.route");
-const loginRouter = require("./routes/login.route");
 
 const app = express();
 
@@ -25,8 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 //set up routing
-app.use("/", loginRouter);
-app.use("/user", userRouter);
+app.use("/", userRouter);
 app.use("/admin", adminRouter);
 app.use("/test", testRouter);
 
