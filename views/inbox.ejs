@@ -10,9 +10,9 @@
   <body>
     <div id="chat-container">
       <div id="chat-title">
+        <img src="./images/logo.png" alt="chatbot" />
         <span>Resturant Chatbot</span>
         <div>
-          <!-- <img src="./images/trash.png" alt="pr" /> -->
           <form method="get" action="/logout">
             <input id="logout" type="submit" value="logout" />
           </form>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div id="chat-message-list">
-        <div class="message-row other-message">
+        <!-- <div class="message-row other-message">
           <div class="message-content">
             <img src="./images/user1.png" alt="chatbot" />
             <div class="message-text">Ok then</div>
@@ -32,18 +32,50 @@
             <div class="message-text">Lorem ipsum dolor sit amet</div>
             <div class="message-time">Apr 16</div>
           </div>
+        </div> -->
+        <div class="message-row other-message">
+          <div class="message-content">
+            <img src="./images/logo.png" alt="chatbot" />
+            <div class="message-text">
+              <div id="welcome-message">
+                <img src="./images/main.jpg" alt="food" />
+                <span
+                  >Welcome to <b>Resturant Chatbot</b> ! Please tell me how can
+                  I help you ?</span
+                >
+                <div id="Order_Food">
+                  <span class="emoji">&#127829;</span> Order Food Online
+                </div>
+                <div id="Book_Table">
+                  <span class="emoji">&#127869;</span> Book a table
+                </div>
+                <div id="My_Orders">
+                  <span class="emoji">&#128221;</span> My Orders
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="message-row other-message">
           <div class="message-content">
-            <img src="./images/user1.png" alt="chatbot" />
-            <div class="message-text">Hi ! Welcome to Resturant Chatbot !</div>
-            <div class="message-time">Apr 16</div>
+            <img src="./images/logo.png" alt="chatbot" />
+            <div class="message-text">
+              Hi <span class="emoji">&#128075;</span> <b><%= data %></b> !
+            </div>
           </div>
         </div>
       </div>
       <div id="chat-form">
-        <input type="text" placeholder="Send a message" />
-        <button>Send</button>
+        <div>
+          <input type="text" placeholder="Send a message" />
+          <button>Send</button>
+        </div>
+        <div id="suggestion">
+          <span>try : </span>
+          <div>Order food</div>
+          <div>Book Table</div>
+          <div>Orders</div>
+        </div>
       </div>
     </div>
   </body>

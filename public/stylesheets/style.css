@@ -194,7 +194,7 @@ input#logout {
   padding: 10px;
   min-width: 800px;
   max-width: 1000px;
-  max-height: 800px;
+  /* max-height: 800px; */
   width: 100%;
   height: 95vh;
   background: var(--primary);
@@ -291,6 +291,7 @@ input#logout {
 
 #chat-title {
   display: flex;
+  align-items: center;
   color: #ffffff;
   font-weight: bold;
   font-size: 2rem;
@@ -301,15 +302,12 @@ input#logout {
 
 #chat-title > span {
   flex-grow: 1;
+  margin-left: 5px;
 }
 
 #chat-title > img {
   cursor: pointer;
-  height: 30px;
-}
-
-#chat-title > img:hover {
-  transform: scale(1.05);
+  height: 50px;
 }
 
 #chat-title div {
@@ -329,8 +327,9 @@ input#logout {
 }
 
 .message-row {
-  display: grid;
-  grid-template-columns: 70%;
+  display: flex;
+  /* grid-template-columns: 70%; */
+  max-width: 70%;
   margin-bottom: 20px;
 }
 
@@ -340,6 +339,8 @@ input#logout {
 
 .message-content img {
   width: 32px;
+  height: 32px;
+  align-self: flex-end;
 }
 
 .you-message {
@@ -391,12 +392,18 @@ input#logout {
 
 #chat-form {
   display: flex;
+  flex-wrap: wrap;
   border-radius: 0 0 10px 0;
   border-top: 2px solid rgba(0, 0, 0, 0.25);
 }
 
-#chat-form input {
+#chat-form div {
   width: 100%;
+  display: flex;
+}
+
+#chat-form input {
+  flex-grow: 1;
   background: var(--primary);
   outline: none;
   padding: 15px;
@@ -415,8 +422,68 @@ input#logout {
   transform: scale(1.05);
 }
 
+#chat-form #suggestion {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+#chat-form #suggestion div {
+  width: fit-content;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+  color: var(--blue);
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+  transition: all ease 0.3s;
+}
+
+#chat-form #suggestion div:hover {
+  transform: translateY(-2px);
+}
+
 ::-webkit-scrollbar {
   display: none;
+}
+
+.emoji {
+  font-size: 20px;
+}
+
+#welcome-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#welcome-message img {
+  width: 100%;
+  height: 30rem;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+#welcome-message div {
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: white;
+  margin-top: 10px;
+}
+
+#welcome-message span {
+  margin-top: 10px;
+  text-align: left;
 }
 
 /* inbox related responsive styles */
