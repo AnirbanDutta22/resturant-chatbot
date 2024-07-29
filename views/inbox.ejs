@@ -12,8 +12,11 @@
       <div id="chat-title">
         <span>Resturant Chatbot</span>
         <div>
-          <img src="./images/trash.png" alt="profile" />
-          <button>logout</button>
+          <!-- <img src="./images/trash.png" alt="pr" /> -->
+          <form method="get" action="/logout">
+            <input id="logout" type="submit" value="logout" />
+          </form>
+          <span><%= data %></span>
         </div>
       </div>
       <div id="chat-message-list">

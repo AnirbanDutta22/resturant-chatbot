@@ -14,7 +14,7 @@ const {
 } = require("../controllers/test.controller");
 
 router.route("/get-all-user").get(getAllUser);
-router.route("/del-all-user").get(deleteAllUser);
+router.route("/del-all-user").delete(deleteAllUser);
 router.route("/get-all-resturant").get(getAllResturant);
 router.route("/del-all-resturant").delete(deleteAllResturant);
 router.route("/get-all-food").get(getAllFood);

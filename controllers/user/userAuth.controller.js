@@ -59,11 +59,8 @@ const registerUser = asyncHandler(async (req, res) => {
     errors.validationError = "Something went wrong ! User not registered !";
     return res.render("register", { errors: errors });
   }
-  // return res
-  //   .status(200)
-  //   .json(
-  //     new ResponseHandler(201, "User registered successfully", createdUser)
-  //   );
+
+  res.status(200);
 
   res.redirect("/");
 });
@@ -74,7 +71,7 @@ const loginPage = async (req, res) => {
 };
 
 //login user
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const errors = {};
 
@@ -113,7 +110,9 @@ const loginUser = asyncHandler(async (req, res) => {
     expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
   };
 
+  req.loggedInUser = loggedInUser;
   res
+    .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options);
 
@@ -139,11 +138,12 @@ const logoutUser = asyncHandler(async (req, res) => {
     secure: false,
   };
 
-  return res
+  res
     .status(200)
     .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ResponseHandler(200, "User logged Out", {}));
+    .clearCookie("refreshToken", options);
+
+  res.redirect("/");
 });
 
 //refresh access token

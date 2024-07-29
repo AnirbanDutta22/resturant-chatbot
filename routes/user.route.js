@@ -22,14 +22,15 @@ const {
 } = require("../controllers/user/booking.controller.js");
 const chatbox = require("../controllers/user/chatbox.controller.js");
 
-router.route("/user").get(chatbox);
-
 //auth
 router.route("/").get(loginPage).post(loginUser);
 router.route("/register").get(registerPage).post(registerUser);
 router.route("/logout").get(authHandler, logoutUser);
 router.route("/change-password").patch(authHandler, changeUserPassword);
 router.route("/refresh-token").patch(refreshAccessToken);
+
+//chatbox
+router.route("/user").get(authHandler, chatbox);
 
 //order
 router.route("/food").get(authHandler, getFood);
